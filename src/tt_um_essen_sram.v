@@ -1,7 +1,11 @@
 `default_nettype none
 
 module tt_um_essen_sram (
-    input  wire [7:0] ui_in,    // Dedicated inputs
+`ifdef USE_POWER_PINS
+	input wire VPWR,
+	input wire VGND,
+`endif 
+	input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
     output wire [7:0] uio_out,  // IOs: Output path
@@ -41,20 +45,31 @@ module tt_um_essen_sram (
 		w_data_q <= ui_in;
 	end
 
-	/* SRAM 256x8 wrapper */	
-	sram_256x8 m_sram(
-		.clk(clk),
-		.mem_en_i(en_q),
+RM_IHPSG13_1P_256x8_c3_bm_bist m_ihp_sram (
+`ifdef USE_POWER_PINS
+	.VDD(VPWR), // logic supply voltage
+	.VSS(VGND), // logic ground
+	.VDDARRAY(VPWR), // memory array supply voltage
+`endif
 
-		.w_en_i(w_en_q),
-		.w_addr_i(addr_q),
-		.w_data_i(w_data_q),
-
-		.r_en_i(r_en_q),
-		.r_addr_i(addr_q),
-		.r_data_o(r_data)
-	);
-
+    .A_CLK(clk),
+    .A_MEN(en_q),
+    .A_WEN(w_en_q),
+    .A_REN(r_en_q),
+    .A_ADDR(addr_q),
+    .A_DIN(w_data_q),
+    .A_DLY(1'b1),
+    .A_DOUT(r_data),
+    .A_BM(8'hFF),
+    .A_BIST_CLK(1'b0),
+    .A_BIST_EN(1'b0),
+    .A_BIST_MEN(1'b0),
+    .A_BIST_WEN(1'b0),
+    .A_BIST_REN(1'b0),
+    .A_BIST_ADDR(1'b0),
+    .A_BIST_DIN(1'b0),
+    .A_BIST_BM(1'b0)
+);
 
 	/* hold read data */ 
 	reg r_valid_q;
