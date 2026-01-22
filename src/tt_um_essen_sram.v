@@ -44,7 +44,7 @@ module tt_um_essen_sram (
 	/* SRAM 256x8 wrapper */	
 	sram_256x8 m_sram(
 		.clk(clk),
-		.mem_en_i(ena_q),
+		.mem_en_i(en_q),
 
 		.w_en_i(w_en_q),
 		.w_addr_i(addr_q),

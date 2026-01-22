@@ -55,8 +55,7 @@ wire [7:0] addr;
 
 assign addr = w_en_i ? w_addr_i: r_addr_i; 
 
-RM_IHPSG13_1P_256x64_c2_bm_bis m_ihp_sram (
-
+RM_IHPSG13_1P_256x8_c3_bm_bist m_ihp_sram (
 `ifdef USE_POWER_PINS
 	.VDD(VPWR), // logic supply voltage
 	.VSS(VGND), // logic ground
