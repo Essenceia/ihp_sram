@@ -33,7 +33,10 @@
   "RT_MAX_LAYER": "TopMetal1",
   "STA_MACRO_PRIORITIZE_NL":false,
   "PDN_CONNECT_MACROS_TO_GRID": true,
-  "PDN_MACRO_CONNECTIONS": ["m_ihp_sram VPWR VGND VDD VSS"],
+  "PDN_MACRO_CONNECTIONS": [
+		"m_ihp_sram VPWR VGND VDD! VSS!",
+		"m_ihp_sram VPWR VGND VDDARRAY! VSS!"
+],
     "MACROS": {
         "RM_IHPSG13_1P_256x8_c3_bm_bist": {
             "instances": {
@@ -69,5 +72,6 @@
             "spice": [],
             "sdf": {}
         }
-    }
+    },
+	"PDN_CFG": "dir::pdn_cfg.tcl"
 }
