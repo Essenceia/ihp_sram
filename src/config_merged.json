@@ -31,6 +31,8 @@
   "VDD_PIN": "VPWR",
   "GND_PIN": "VGND",
   "RT_MAX_LAYER": "TopMetal1",
+
+  "MAGIC_EXT_UNIQUE": "notopports",
   "STA_MACRO_PRIORITIZE_NL":false,
   "PDN_CONNECT_MACROS_TO_GRID": true,
   "PDN_MACRO_CONNECTIONS": [
@@ -42,8 +44,8 @@
             "instances": {
                 "m_ihp_sram": {
                     "location": [
-                        10,
-                        20
+                        100,
+                        120
                     ],
                     "orientation": "N"
                 }
